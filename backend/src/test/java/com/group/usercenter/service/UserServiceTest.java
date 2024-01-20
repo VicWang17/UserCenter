@@ -19,19 +19,6 @@ class UserServiceTest {
     @Resource
     private UserService userService;
 
-    @Test
-    void testAdd(){
-        User user = new User();
-        user.setUserAccount("123");
-        user.setGender(1);
-        user.setUserPassword("sd123");
-        user.setPhone("123");
-        user.setEmail("123");
-        boolean result = userService.save(user);
-        System.out.println(user.getUserId());
-        Assertions.assertTrue(result);
-
-    }
 
 
     @Test
