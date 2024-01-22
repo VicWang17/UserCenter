@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public interface UserService extends IService<User> {
 
+
+
     /**
      * @param userAccount   用户账户
      * @param userPassword  用户密码
@@ -26,4 +28,6 @@ public interface UserService extends IService<User> {
      * @return 脱敏后的用户信息
      */
     User doLogin(String userAccount, String userPassword, HttpServletRequest request);
+
+    User getSaveUser(User originUser);
 }

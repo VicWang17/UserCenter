@@ -1,11 +1,10 @@
 package com.group.usercenter.service.impl;
-import java.util.Date;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.group.usercenter.mapper.UserMapper;
 import com.group.usercenter.model.domain.User;
 import com.group.usercenter.service.UserService;
-import com.group.usercenter.mapper.UserMapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -13,10 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import static com.group.usercenter.constant.UserConstant.USER_LOGIN_STATE;
+
 
 /**
  * @author Vic Wang
@@ -33,7 +30,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     private final static String SALT = "vic";
 
-    private final static String USER_LOGIN_STATE = "userLoginState";
+
 
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
@@ -123,19 +120,29 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             return null;
         }
         //3. 用户脱敏
-        User safeUser = new User();
-        safeUser.setUserId(user.getUserId());
-        safeUser.setUserAccount(user.getUserAccount());
-        safeUser.setAvatarUrl(user.getAvatarUrl());
-        safeUser.setGender(user.getGender());
-        safeUser.setPhone(user.getPhone());
-        safeUser.setEmail(user.getEmail());
-        safeUser.setUserStatus(0);
-        safeUser.setCreateTime(user.getCreateTime());
+        User safeUser = getSaveUser(user);
 
         //4. 记录用户登录态
         request.getSession().setAttribute(USER_LOGIN_STATE, safeUser);
 
         return safeUser;
     }
+
+    @Override
+    public User getSaveUser(User originUser){
+        User safeUser = new User();
+        safeUser.setUserId(originUser.getUserId());
+        safeUser.setUserAccount(originUser.getUserAccount());
+        safeUser.setAvatarUrl(originUser.getAvatarUrl());
+        safeUser.setGender(originUser.getGender());
+        safeUser.setPhone(originUser.getPhone());
+        safeUser.setEmail(originUser.getEmail());
+        safeUser.setUserStatus(0);
+        safeUser.setUserRole(originUser.getUserRole());
+        safeUser.setCreateTime(originUser.getCreateTime());
+
+        return safeUser;
+    }
+
+
 }

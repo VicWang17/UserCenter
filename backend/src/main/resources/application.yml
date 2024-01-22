@@ -6,6 +6,8 @@ spring:
     url: jdbc:mysql://localhost:3306/center
     username: root
     password: 123456
+  session:
+    timeout: 86400 # todo: 意味着什么？
 
 mybatis-plus:
   configuration:
