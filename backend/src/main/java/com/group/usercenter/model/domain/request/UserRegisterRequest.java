@@ -9,6 +9,14 @@ import java.io.Serializable;
  */
 public class UserRegisterRequest implements Serializable {
 
+    private static final long serialVersionUID = 498135722730998432L;
+
+    private String userAccount;
+
+    private String userPassword;
+
+    private String checkPassword;
+
     public String getUserAccount() {
         return userAccount;
     }
@@ -33,11 +41,5 @@ public class UserRegisterRequest implements Serializable {
         this.checkPassword = checkPassword;
     }
 
-    private static final long serialVersionUID = 498135722730998432L;
 
-    private String userAccount;
-
-    private String userPassword;
-
-    private String checkPassword;
 }
