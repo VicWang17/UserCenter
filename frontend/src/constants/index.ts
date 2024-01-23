@@ -1,0 +1,1 @@
+export const SYSTEM_LOGO = "http://vicwang17.com/wp-content/uploads/2023/07/cropped-V-1-300x300.png" 
