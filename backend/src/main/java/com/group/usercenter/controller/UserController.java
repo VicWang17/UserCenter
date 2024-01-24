@@ -19,7 +19,7 @@ import static com.group.usercenter.constant.UserConstant.ADMIN_ROLE;
 import static com.group.usercenter.constant.UserConstant.USER_LOGIN_STATE;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     @Resource
@@ -58,6 +58,18 @@ public class UserController {
 
     }
 
+    @GetMapping("/current")
+    public User getCurrentUser(HttpServletRequest request){
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        if (currentUser == null){
+            return null;
+        }
+        long userId = currentUser.getUserId();
+        User user = userService.getById(userId);
+        return userService.getSaveUser(user);
+
+    }
     @GetMapping("/search")
     public List<User> searchUsers(String username, HttpServletRequest request){
         if (!isAdmin(request)){

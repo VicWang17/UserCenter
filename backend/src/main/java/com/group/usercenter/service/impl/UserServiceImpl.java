@@ -130,6 +130,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Override
     public User getSaveUser(User originUser){
+        if (originUser == null){
+            return null;
+        }
         User safeUser = new User();
         safeUser.setUserId(originUser.getUserId());
         safeUser.setUserAccount(originUser.getUserAccount());
