@@ -28,7 +28,7 @@ export default [
     ],
   },
   {
-    path: '/welcome',
+    path: '/welcome', 
     name: 'welcome',
     icon: 'smile',
     component: './Welcome',
@@ -41,12 +41,12 @@ export default [
     routes: [
       {
         path: '/admin',
-        redirect: '/admin/sub-page',
+        redirect: '/admin/UserManage',
       },
       {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        component: './Admin',
+        path: '/admin/user-manage',
+        name: '用户管理',
+        component: './Admin/UserManage',
       },
     ],
   },

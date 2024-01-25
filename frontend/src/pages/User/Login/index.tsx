@@ -174,7 +174,7 @@ const Login: React.FC = () => {
             <br></br><br></br>
             <a href="/user/register" target="_blank">还没账号？点这里注册！！</a>
             </>} 
-          initialValues={{
+          initialValues={{ 
             autoLogin: true,
           }}
           
