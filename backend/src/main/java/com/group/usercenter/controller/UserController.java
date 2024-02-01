@@ -54,15 +54,26 @@ public class UserController {
         if (StringUtils.isAnyBlank(userAccount, userPassword)) {
             return null;
         }
-        return userService.doLogin(userAccount, userPassword,request);
+        return userService.doLogin(userAccount, userPassword, request);
 
     }
 
+    @PostMapping("/logout")
+    public Integer userLogout(HttpServletRequest request) {
+        if (request == null) {
+            return null;
+        }
+
+        return userService.userLogout(request);
+
+    }
+
+
     @GetMapping("/current")
-    public User getCurrentUser(HttpServletRequest request){
+    public User getCurrentUser(HttpServletRequest request) {
         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
         User currentUser = (User) userObj;
-        if (currentUser == null){
+        if (currentUser == null) {
             return null;
         }
         long userId = currentUser.getUserId();
@@ -70,24 +81,26 @@ public class UserController {
         return userService.getSaveUser(user);
 
     }
+
     @GetMapping("/search")
-    public List<User> searchUsers(String username, HttpServletRequest request){
-        if (!isAdmin(request)){
+    public List<User> searchUsers(String username, HttpServletRequest request) {
+        if (!isAdmin(request)) {
             return new ArrayList<>();
         }
 
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        if (StringUtils.isNotBlank(username)){
-            queryWrapper.like("username",username);  //默认模糊查询
+        if (StringUtils.isNotBlank(username)) {
+            queryWrapper.like("username", username);  //默认模糊查询
         }
         List<User> userList = userService.list(queryWrapper);
-        return userList.stream().map(user -> { return userService.getSaveUser(user);
+        return userList.stream().map(user -> {
+            return userService.getSaveUser(user);
         }).collect(Collectors.toList()); //todo: 理解一下
     }
 
     @PostMapping("/delete")
-    public boolean deleteUser(@RequestBody long id, HttpServletRequest request){
-        if (!isAdmin(request)){
+    public boolean deleteUser(@RequestBody long id, HttpServletRequest request) {
+        if (!isAdmin(request)) {
             return false;
         }
         if (id <= 0) {
@@ -96,7 +109,7 @@ public class UserController {
         return userService.removeById(id);
     }
 
-    private boolean isAdmin(HttpServletRequest request){
+    private boolean isAdmin(HttpServletRequest request) {
         // 仅管理员可查询
         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
         User user = (User) userObj;
