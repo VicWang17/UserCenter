@@ -113,7 +113,7 @@ const Register: React.FC = () => {
       }
       // 注册
       const id = await register(values);
-      if (id>0) {
+      if (id) {
         const defaultLoginSuccessMessage = intl.formatMessage({
           id: 'pages.Register.success',
           defaultMessage: '注册成功！',
@@ -123,10 +123,8 @@ const Register: React.FC = () => {
         const redirect  = urlParams.get('redirect')
         history.push('login');
         return;
-      }else{
-        throw new Error(`register error id = ${id}`);
       }
-      
+
     } catch (error) {
       const defaultLoginFailureMessage = intl.formatMessage({
         id: 'pages.Register.failure',
@@ -171,7 +169,7 @@ const Register: React.FC = () => {
           initialValues={{
             autoLogin: true,
           }}
-          
+
           onFinish={async (values) => {
             await handleSubmit(values as API.RegisterParams);
           }}
@@ -188,7 +186,7 @@ const Register: React.FC = () => {
                   defaultMessage: '账户密码注册',
                 }),
               },
-              
+
             ]}
           />
 
@@ -263,13 +261,13 @@ const Register: React.FC = () => {
             </>
           )}
 
-          
+
           <div
             style={{
               marginBottom: 24,
             }}
           >
-            
+
           </div>
         </LoginForm>
       </div>

@@ -3,7 +3,7 @@ import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { useRef } from 'react';
 import { API } from '@/services/ant-design-pro/typings';
 import { searchUsers } from '@/services/ant-design-pro/api';
-import { Image } from 'antd'; 
+import { Image } from 'antd';
 export const waitTimePromise = async (time: number = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -36,7 +36,7 @@ const columns: ProColumns<API.CurrentUser>[] = [
         <Image src={record.avatarUrl} width={100}/>
       </div>
     ),
-  }, 
+  },
 
   {
     title: '性别',
@@ -72,7 +72,7 @@ const columns: ProColumns<API.CurrentUser>[] = [
     dataIndex: 'createTime',
     valueType:'dateTime'
   },
-  
+
   {
     title: '操作',
     valueType: 'option',
@@ -156,7 +156,7 @@ export default () => {
       }}
       dateFormatter="string"
       headerTitle="用户名单"
-      
+
     />
   );
-}; 
+};

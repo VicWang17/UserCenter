@@ -28,7 +28,7 @@ export default [
     ],
   },
   {
-    path: '/welcome', 
+    path: '/welcome',
     name: 'welcome',
     icon: 'smile',
     component: './Welcome',

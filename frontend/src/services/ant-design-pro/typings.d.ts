@@ -1,4 +1,3 @@
-import { Register } from '@/services/ant-design-pro/api';
 // @ts-ignore
 /* eslint-disable */
 
@@ -14,7 +13,7 @@ declare namespace API {
     userStatus: number;
     userRole: number;
     createTime: Date;
-    
+
   };
 
   type LoginResult = {
@@ -51,6 +50,13 @@ declare namespace API {
     total?: number;
     success?: boolean;
   };
+
+  type BaseResponse<T> = {
+    code: number,
+    data: T,
+    message: string,
+    description: string,
+  }
 
   type FakeCaptcha = {
     code?: number;
